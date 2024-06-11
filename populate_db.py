@@ -3,7 +3,8 @@ import datetime
 from sqlmodel import Session
 
 from database import create_db_and_tables, engine
-from models import PurposeType, Trip, User
+from models import User
+from trips import models as trips_models
 
 
 def populate_users():
@@ -15,19 +16,19 @@ def populate_users():
 
 
 def populate_trips():
-    trip_1 = Trip(
+    trip_1 = trips_models.Trip(
         user_id=1,
         country="France",
         start_date=datetime.date(year=2023, month=5, day=1),
         end_date=datetime.date(year=2023, month=5, day=5),
-        purpose=PurposeType.TOURISM,
+        purpose=trips_models.PurposeType.TOURISM,
     )
-    trip_2 = Trip(
+    trip_2 = trips_models.Trip(
         user_id=1,
         country="Poland",
         start_date=datetime.date(year=2024, month=5, day=1),
         # end_date=datetime.date(year=2024, month=5, day=5),
-        purpose=PurposeType.NOT_SELECTED,
+        purpose=trips_models.PurposeType.NOT_SELECTED,
     )
 
     with Session(engine) as session:
